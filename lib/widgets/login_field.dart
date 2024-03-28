@@ -4,13 +4,15 @@ import '../pallete.dart';
 class LoginField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
-  const LoginField({super.key, required this.hintText, this.obscureText = false});
+  TextEditingController controller;
+  LoginField({super.key, required this.hintText, required this.controller, this.obscureText = false});
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 350),
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(27),
           enabledBorder: OutlineInputBorder(
