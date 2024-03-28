@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'login_screen.dart';
+import 'services/realtime_service.dart';
+
 class HomeScreen extends StatefulWidget {
   final String token;
   final String storeId;
+
   const HomeScreen(this.token, this.storeId, {super.key});
 
   @override
@@ -10,6 +14,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final realTimeService;
+
+  @override
+  void initState() {
+    super.initState();
+    realTimeService =
+        RealTimeService(widget.token, 'private-stores.${widget.storeId}');
+  }
+
+  @override
+  void dispose() {
+    realTimeService.disconnect();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,10 +38,22 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              realTimeService.disconnect();
+              realTimeService.connect();
+            },
             icon: const Icon(Icons.refresh),
           ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.logout)),
+          IconButton(
+              onPressed: () {
+                realTimeService.disconnect();
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
+              },
+              icon: const Icon(Icons.logout)),
         ],
       ),
       body: const Center(
