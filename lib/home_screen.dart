@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'helpers/dio.dart';
 import 'login_screen.dart';
 import 'services/realtime_service.dart';
 
@@ -15,12 +16,16 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final realTimeService;
+  late final dio;
 
   @override
   void initState() {
     super.initState();
     realTimeService =
         RealTimeService(widget.token, 'private-stores.${widget.storeId}');
+
+    dio = createDio(widget.token);
+    print(widget.token);
   }
 
   @override
@@ -34,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(Icons.menu),
-        title: const Text('Impressor Delivery (Código)'),
+        title: Text('Impressor Delivery (${widget.storeId})'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -45,15 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(Icons.refresh),
           ),
           IconButton(
-              onPressed: () {
-                realTimeService.disconnect();
-
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                );
-              },
-              icon: const Icon(Icons.logout)),
+            onPressed: sair,
+            icon: const Icon(Icons.logout),
+          ),
         ],
       ),
       body: const Center(
@@ -72,6 +71,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void sair() async {
+    realTimeService.disconnect();
+    await dio.post('/logout', data: {
+      'device_name': 'app-desktop',
+    });
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
     );
   }
 }

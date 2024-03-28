@@ -4,6 +4,7 @@ import 'package:dart_pusher_channels/dart_pusher_channels.dart';
 
 import '../helpers/dio.dart';
 import '../secrets.dart';
+import 'print_service.dart';
 
 class RealTimeService {
   String token;
@@ -79,9 +80,9 @@ class RealTimeService {
   void sendPrint(String idPedido) async {
     final pedido = await dio.get('/orders/$idPedido');
 
-    // final printService = PrintService("TM T20X");
-    // final respostaPrint = await printService.print(pedido.data);
-    // print(respostaPrint);
+    final printService = PrintService("TM T20X");
+    final respostaPrint = await printService.print(pedido.data);
+    print(respostaPrint);
   }
 
   disconnect() async {
