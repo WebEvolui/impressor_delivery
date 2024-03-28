@@ -1,16 +1,11 @@
-# impressor_delivery
+# Curso: Laravel 11 e Flutter 3 para aplicações em Tempo Real
 
-Um impressor para windows
+Faça impressões de pedidos em tempo real e desenvolva Apps dinâmicos com broadcasting usando flutter e laravel
+
+## Compre o curso aqui
+
+[UDEMY: Laravel 11 e Flutter 3 para aplicações em Tempo Rea](https://www.udemy.com/course/draft/5877166/?referralCode=15E8D1FE6E078DDF9049)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Instale as dependências e rode o projeto, lembrando que se você não fez o curso não vai conseguir rodar o projeto, por falta de conhecimento do mesmo
